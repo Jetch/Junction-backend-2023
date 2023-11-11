@@ -1,8 +1,12 @@
-// Variables to keep track of the previous sensor data
+import { Application } from "@splinetool/runtime";
+
+const canvas = document.getElementById("canvas3d");
+const app = new Application(canvas);
+app.load("https://prod.spline.design/PIRxMzm9CSqpa2YR/scene.splinecode");
+
 let prevSensorData = null;
 
-// Threshold to consider as a "big movement"
-const movementThreshold = 0.1; // You can adjust this value
+const movementThreshold = 0.1;
 
 const initialSliderValue = 5;
 
@@ -19,37 +23,57 @@ function calculateAbsoluteDifference(data) {
         const diffAy = Math.abs(data.ay - prevSensorData.ay);
         const diffAz = Math.abs(data.az - prevSensorData.az);
 
-        const totalDiff = diffAx + diffAy + diffAz;
+        const diffGx = Math.abs(data.gx - prevSensorData.gx);
+        const diffGy = Math.abs(data.gy - prevSensorData.gy);
+        const diffGz = Math.abs(data.gz - prevSensorData.gz);
 
-        if (totalDiff >= movementThreshold) {
+        const diffOx = Math.abs(data.ox - prevSensorData.ox);
+        const diffOy = Math.abs(data.oy - prevSensorData.oy);
+        const diffOz = Math.abs(data.oz - prevSensorData.oz);
+
+        const totalDiffOfA = diffAx + diffAy + diffAz;
+        console.log(totalDiffOfA)
+
+        const totalDiffOfY = diffGx + diffGy + diffGz;
+        console.log(totalDiffOfY)
+
+        const totalDiffOfO = diffOx + diffOy + diffOz;
+        console.log(totalDiffOfO)
+
+        if (totalDiffOfA >= movementThreshold) {
             console.log('Big Movement on _A_ Detected!');
             const newValue = parseInt(audio1Slider.value) + 1;
             updateSliderValue(newValue);
             console.log(audio1Slider.value);
+            //can also add the drum
+
+            const keyEvent = new KeyboardEvent('keydown', {
+                key: 'f',
+                code: 'KeyF',
+                which: 70,
+                keyCode: 70,
+            });
+            document.dispatchEvent(keyEvent);
+        }
+
+        if (totalDiffOfY >= movementThreshold)
+        {
+            console.log('Big Movement on _G_ Detected!');
+        }
+
+        if (totalDiffOfO >= movementThreshold)
+        {
+            console.log('Big Movement on _O_ Detected!');
         }
     }
 
     prevSensorData = data;
 }
 
-// Replace this with your actual data reception code (e.g., receiving data from a socket)
-// The data parameter should be the sensor data as an object
 function handleReceivedSensorData(data) {
     calculateAbsoluteDifference(data);
 }
 
-// Example usage: Call handleReceivedSensorData with your sensor data
-const sensorData1 = {
-    ax: -0.08816913570985198,
-    ay: -0.07182488076090812,
-    az: 0.09079670773446559,
-};
-
-const sensorData2 = {
-    ax: 0.015036168025061487,
-    ay: -0.10292378337979316,
-    az: 0.10995149005949496,
-};
-
-handleReceivedSensorData(sensorData1);
-handleReceivedSensorData(sensorData2);
+socket.on('motion', motionData => {
+    handleReceivedSensorData(motionData);
+});

@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+}
+html,
+body {
+  height: 90%;
+}
+
+canvas {
+  display: block;
+  height: 70%;
+}
+
+.custom-button {
+    position: absolute;
+    z-index: 2;
+}
+
