@@ -51,7 +51,7 @@ function calculateAbsoluteDifference(data) {
                 which: 70,
                 keyCode: 70,
             });
-            document.dispatchEvent(keyEvent);
+            canvas.dispatchEvent(keyEvent);
         }
 
         // if (totalDiffOfY >= movementThreshold)
@@ -64,7 +64,7 @@ function calculateAbsoluteDifference(data) {
                 which: 70,
                 keyCode: 70,
             });
-            document.dispatchEvent(keyEvent);
+            canvas.dispatchEvent(keyEvent);
             const newValue = parseInt(audio1Slider.value) - 1;
             updateSliderValue(newValue);
         }
