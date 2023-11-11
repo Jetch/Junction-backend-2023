@@ -201,7 +201,3 @@ Skeleton.prototype.display = function () {
         p.display();
     }
 }
-
-
-
-
