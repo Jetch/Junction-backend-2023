@@ -1,26 +1,74 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello!</title>
+   </head>
+   <body>
+<div id="audioplay">
+<audio id='audio1' src="/ex1.wav" type="audio/wav" preload="auto" autobuffer controls ></audio>
+<audio id='audio2' src="ex2.wav" type="audio/wav" preload="auto" autobuffer controls></audio>
+<audio id='audio3' src="ex3.wav" type="audio/wav" preload="auto" autobuffer controls></audio>
+<audio id='audio4' src="ex4.wav" type="audio/wav" preload="auto" autobuffer controls></audio>
+
+<button id='playaudio' onclick='playAudio()'>Play Audio</button>
+
+<script>
+function playAudio(){
+    var audio1 = document.getElementById('audio1');
+    var audio2 = document.getElementById('audio2');
+    var audio3 = document.getElementById('audio3');
+    var audio4 = document.getElementById('audio4');
+    audio1.play();
+    audio2.play();
+    audio3.play();
+    audio4.play();
+}
+
+function setVolumeForTrack(trackid, val) {
+    var audio = document.getElementById(trackid);
+    audio.volume = val;
+
+    console.log(audio.volume);
+}
+
+function sliderDragged(ev) {
+    console.log(ev.target.name, ev.target.value);
+    setVolumeForTrack(ev.target.name, ev.target.value/10.0);
+}
 
 
+</script>
+
+  <input name="audio1" type="range" min="0" max="10" value="10" class="slider" id="myRange1" >
+  <input name="audio2" type="range" min="0" max="10" value="10" class="slider" id="myRange2" >
+  <input name="audio3" type="range" min="0" max="10" value="10" class="slider" id="myRange3">
+  <input name="audio4" type="range" min="0" max="10" value="10" class="slider" id="myRange4">
+
+
+  <br><br>
   <p id="acceldiv"></p>
   <p id="gyrodiv"></p>
-<script src = "/socket.io/socket.io.js"></script>
 
 <!-- initial setup -->
 <script>
-    var socket = null;
-    socket = io();
-
+    var channel = null;
     var lastEventDate1 = Date.now();
     var lastEventDate2 = Date.now();
 
     var ax=0, ay=0, az=0, gx=0, gy=0,gz=0,ox=0,oy=0,oz=0;
 
+    function setChannel() {
+      channel = document.getElementById("channel").value;
+      console.log(channel);
+    }
+
     function handleMotion(event) {
-            ax = event.acceleration.x;
+        ax = event.acceleration.x;
         ay = event.acceleration.y;
         az = event.acceleration.z;
         gx = event.rotationRate.alpha;
         gy = event.rotationRate.beta;
-        gz = event.rotationRate.gamma;  
+        gz = event.rotationRate.gamma;
 
 
 
@@ -40,8 +88,7 @@
         if(lastEventDate2+100<Date.now()) {
                 console.log(ax,ay,az,gx,gy,gz,ox,oy,oz);
 
-if(socket !=  null && socket.connected) {
-    console.log("socket connected, so sending data");
+if(socket !=  null && socket.readyState === WebSocket.OPEN) {
                 // Sample JSON data
     const jsonData = {
       ax: ax,
@@ -52,14 +99,13 @@ if(socket !=  null && socket.connected) {
       gz: gz,
       ox: ox,
       oy: oy,
-      oz: oz
+      oz: oz,
+      channel: channel
     };
 
     // Sending JSON data as a string
-    
-    // TODO: uncomment for production!
-    socket.emit("motion", jsonData);
-    
+    socket.send(JSON.stringify(jsonData));
+    }
 
 
                 lastEventDate2 = Date.now();
@@ -73,8 +119,9 @@ if(socket !=  null && socket.connected) {
     document.getElementById("myRange2").addEventListener("input", sliderDragged);
     document.getElementById("myRange3").addEventListener("input", sliderDragged);
     document.getElementById("myRange4").addEventListener("input", sliderDragged);
-}
 
+
+var socket = null;
 
 function requestPermission() {
    // Request permission for iOS 13+ devices
@@ -89,20 +136,22 @@ function requestPermission() {
     window.addEventListener("deviceorientation", handleOrientation);
 
 
-    socket.emit('message', "Hello from Yuri!")
 
+    socket = new WebSocket('wss://junction-w0u1.onrender.com'); // Replace with your WebSocket server URL
 
-    /*
-      socket.on('motion', text => {
-        const el = document.createElement('li')
-        el.innerHTML = JSON.stringify(text);
-        document.querySelector('ul').appendChild(el);
-      })
-      */
+  socket.onOpen = function(event) {
+    console.log('WebSocket connection opened');
+
+    }
 
 
 }
 </script>
-
+  <textarea id="channel"></textarea>
+  <br/>
+  <button onclick="setChannel();">Submit numbers on screen</button>
+  </br>
   <button onclick="requestPermission();">Start</button>
-
+  </div>
+</body>
+  </html>
