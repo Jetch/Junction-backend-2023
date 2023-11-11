@@ -1,4 +1,4 @@
-import Skeleton from './skeleton'; // Replace './skeleton' with the correct path to your 'skeleton.js' file.
+import Skeleton from './app'; // Replace './skeleton' with the correct path to your 'skeleton.js' file.
 
 // Create a new dancer instance
 const dancer = new Skeleton(/* provide the necessary constructor arguments */);

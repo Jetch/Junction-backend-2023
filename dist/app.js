@@ -81,7 +81,7 @@ Particle.prototype.unlock = function () {
     this.p.unlock();
 }
 
-function Skeleton(x, y) {
+export default function Skeleton(x, y) {
     this.parts = []; // array of body parts
     this.springs = []; // array of joints
 
@@ -203,4 +203,4 @@ Skeleton.prototype.display = function () {
 }
 
 
-module.exports = Skeleton;
+// module.exports = Skeleton;
