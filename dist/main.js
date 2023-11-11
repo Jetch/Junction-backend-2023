@@ -13,6 +13,9 @@ const initialSliderValue = 5;
 const audio1Slider = document.getElementById("myRange1");
 audio1Slider.value = initialSliderValue;
 
+const audio2Slider = document.getElementById("myRange2");
+audio2Slider.value = initialSliderValue;
+
 function updateSliderValue(value) {
     audio1Slider.value = value;
 }
@@ -40,7 +43,7 @@ function calculateAbsoluteDifference(data) {
         const totalDiffOfO = diffOx + diffOy + diffOz;
         console.log(totalDiffOfO)
 
-        if (totalDiffOfA >= movementThreshold) {
+        if (diffAx >= 2) {
             console.log('Big Movement on _A_ Detected!');
             const newValue = parseInt(audio1Slider.value) + 1;
             updateSliderValue(newValue);
@@ -58,9 +61,9 @@ function calculateAbsoluteDifference(data) {
 
         if (totalDiffOfY >= movementThreshold)
         {
-            console.log('Big Movement on _G_ Detected!');
+            console.log('Media Movement on _G_ Detected!');
             const keyEvent = new KeyboardEvent('keydown', {
-                key: 'F',
+                key: 'g',
                 code: 'KeyG',
                 which: 70,
                 keyCode: 70,
