@@ -37,11 +37,10 @@ function sliderDragged(ev) {
 
 </script>
 
-  <input name="audio1" type="range" min="0" max="10" value="10" class="slider" id="myRange1" >
-  <input name="audio2" type="range" min="0" max="10" value="10" class="slider" id="myRange2" >
-  <input name="audio3" type="range" min="0" max="10" value="10" class="slider" id="myRange3">
-  <input name="audio4" type="range" min="0" max="10" value="10" class="slider" id="myRange4">
-
+  <input name="audio1" type="range" min="0" max="10" value="5" class="slider" id="myRange1" >
+  <input name="audio2" type="range" min="0" max="10" value="5" class="slider" id="myRange2" >
+  <input name="audio3" type="range" min="0" max="10" value="5" class="slider" id="myRange3">
+  <input name="audio4" type="range" min="0" max="10" value="5" class="slider" id="myRange4">
 
 <script>
     var socket = null;
@@ -58,5 +57,6 @@ socket.on('motion', text => {
         document.querySelector('ul').appendChild(el);
       })
 </script>
+<script type="module" src="./main.js"></script>
 
 <ul></ul>
