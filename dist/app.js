@@ -203,6 +203,7 @@ Skeleton.prototype.display = function () {
 }
 
 //
+let prevSensorData = null;
 
 function calculateAbsoluteDifference(data) {
     if (prevSensorData) {
@@ -275,9 +276,9 @@ function handleReceivedSensorData(data) {
     calculateAbsoluteDifference(data);
 }
 
-    var socket = null;
-    socket = io();
-    socket.on('motion', motionData => {
+var socket = null;
+socket = io();
+socket.on('motion', motionData => {
     handleReceivedSensorData(motionData);
     console.log(motionData)
 });
