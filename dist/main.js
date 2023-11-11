@@ -37,35 +37,20 @@ function calculateAbsoluteDifference(data) {
                 key: 'f',
             });
             document.dispatchEvent(keyUp);
-            Skeleton.dancer.raiseShoulder();
+            dancer.raiseShoulder();
         }
 
-        if (Math.abs(data.ax) < 0.03) 
+        if (Math.abs(data.ax) < 0.0065) 
         {
             console.log('Move!!!!!');                        
             const newValue = parseInt(audio1Slider.value) - 1;
             updateSliderValue(newValue);
-            Skeleton.dancer.raiseShoulder();
+            dancer.dancefast();
         }
 
-        if (diffAx >= 3) {
-            console.log('Big Movement on _O_ Detected!');
-            
-            const mouseClickEvent = new MouseEvent('mousedown', {
-                bubbles: true,
-                cancelable: true,
-                view: window
-            });
-
-            document.dispatchEvent(mouseClickEvent);
-
-            const mouseUp = new MouseEvent('mouseup', {
-                bubbles: true,
-                cancelable: true,
-                view: window
-            });
-
-            document.dispatchEvent(mouseUp);
+        if (diffAx >= 4) {
+            console.log('Very Big Movement Detected!');
+            dancer.dance();
         }
     }
 

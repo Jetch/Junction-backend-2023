@@ -113,6 +113,9 @@ function Skeleton(x, y) {
     // Head
     this.springs.push(new VerletSpring2D(this.parts[0].p, this.parts[1].p, 5, 0.01));
 
+    // Head
+    this.springs.push(new VerletSpring2D(this.parts[0].p, this.parts[1].p, 5, 0.01));
+
     // Arms
     this.springs.push(new VerletSpring2D(this.parts[1].p, this.parts[2].p, 20, 0.01));
     this.springs.push(new VerletSpring2D(this.parts[1].p, this.parts[3].p, 20, 0.01));
@@ -161,15 +164,23 @@ function Skeleton(x, y) {
 
     this.hangle = 0;
     this.vangle = 0;
+    this.headhangle = 0;
+    this.headvangle = 0;
 }
 
 // Dance
-Skeleton.prototype.dance = function () {
+Skeleton.prototype.dance = function ()
+{
+    this.parts[0].p.x = this.origin.x + sin(this.headhangle) * 20;
+    this.parts[0].p.y = this.origin.y + cos(this.headvangle) * 20;
+
     this.parts[9].p.x -= 20;
     this.parts[10].p.x += 20;
 
     this.hangle += 0.002;  
     this.vangle += 0.01;
+    this.headhangle += 0.3;
+    this.headvangle += 0.3;
 }
 
 Skeleton.prototype.raiseShoulder = function () {
@@ -184,6 +195,18 @@ Skeleton.prototype.danceFast = function () {
     this.parts[5].p.y -= 10; 
     this.hangle += 0.0055;
 }
+
+Skeleton.prototype.collapse = function () {
+    this.parts[1].p.y += 10; // Lower the chest
+    this.parts[8].p.y += 10; // Lower the hips
+    this.parts[9].p.x -= 5;  // Move left leg to the left
+    this.parts[10].p.x += 5; // Move right leg to the right
+    this.parts[11].p.y += 5; // Lower left toes
+    this.parts[12].p.y += 5; // Lower right toes
+
+    this.hangle += 0.0005;
+}
+
 
 
 Skeleton.prototype.display = function () {
