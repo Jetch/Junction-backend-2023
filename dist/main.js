@@ -3,7 +3,7 @@
 // const canvas = document.getElementById("canvas3d");
 // const app = new Application(canvas);
 // app.load("https://prod.spline.design/PIRxMzm9CSqpa2YR/scene.splinecode");
-const Skeleton = require('./currentFile'); // Replace 'currentFile' with the actual filename of your current file.
+const Skeleton = require('./app'); // Replace 'currentFile' with the actual filename of your current file.
 
 const dancer = new Skeleton(x, y); // Replace 'x' and 'y' with appropriate values
 // dancer.raiseShoulder();
