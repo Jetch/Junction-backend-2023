@@ -86,6 +86,7 @@ function sliderDragged(ev) {
                 console.log(ax,ay,az,gx,gy,gz,ox,oy,oz);
 
 if(socket !=  null && socket.connected) {
+    console.log("socket connected, so sending data");
                 // Sample JSON data
     const jsonData = {
       ax: ax,
