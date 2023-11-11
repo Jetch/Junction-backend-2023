@@ -75,7 +75,9 @@ function calculateAbsoluteDifference(data) {
                 which: 70,
                 keyCode: 70,
             });
-            document.dispatchEvent(keyEvent);
+            // document.dispatchEvent(keyEvent);
+            canvas.dispatchEvent(keyEvent);
+
         }
     }
 
