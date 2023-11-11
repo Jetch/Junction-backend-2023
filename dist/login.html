@@ -49,16 +49,90 @@
       background-color: #45a049;
     }
   </style>
+  <script src="/socket.io/socket.io.js"></script>
+
+  <!-- initial setup -->
+  <script>
+    var socket = null;
+    socket = io();
+    var channel = null;
+    var lastEventDate = Date.now();
+  
+    var ax = 0, ay = 0, az = 0, gx = 0, gy = 0, gz = 0, ox = 0, oy = 0, oz = 0;
+  
+    function setChannel() {
+      channel = document.getElementById("code").value;
+      if (channel === "") { return; };
+      requestPermission();
+      document.getElementById("title").innerHTML = "Ready to Play! \uD83E\uDD17";
+      document.getElementById("codeblock").hidden = true;
+    }
+  
+    function handleMotion(event) {
+      ax = event.acceleration.x;
+      ay = event.acceleration.y;
+      az = event.acceleration.z;
+      gx = event.rotationRate.alpha;
+      gy = event.rotationRate.beta;
+      gz = event.rotationRate.gamma;
+    }
+  
+    function handleOrientation(event) {
+      ox = event.alpha;
+      oy = event.beta;
+      oz = event.gamma;
+  
+      if (lastEventDate + 100 < Date.now()) {
+        console.log(ax, ay, az, gx, gy, gz, ox, oy, oz);
+  
+        if (socket != null && socket.connected) {
+          console.log("socket connected, so sending data");
+          // Sample JSON data
+          const jsonData = {
+            ax: ax,
+            ay: ay,
+            az: az,
+            gx: gx,
+            gy: gy,
+            gz: gz,
+            ox: ox,
+            oy: oy,
+            oz: oz,
+            channel: channel
+          };
+  
+          // Sending JSON data
+          socket.emit("motion", jsonData);
+  
+          lastEventDate = Date.now();
+        }
+      }
+  
+    }
+  
+  
+    function requestPermission() {
+      // Request permission for iOS 13+ devices
+      if (
+        DeviceMotionEvent &&
+        typeof DeviceMotionEvent.requestPermission === "function"
+      ) {
+        DeviceMotionEvent.requestPermission();
+      }
+      window.addEventListener("devicemotion", handleMotion);
+      window.addEventListener("deviceorientation", handleOrientation);
+    }
+  </script>
   <title>Enter Code Login</title>
 </head>
 <body>
   <div class="login-container">
-    <h2>Enter the Code to begin</h2>
+    <h2 id="title">Enter the code to begin</h2>
+    <span id="codeblock">
     <p>The code should be shown on your other device</p>
-    <form>
-      <input type="text" id="code" class="code-input" placeholder="Enter code" autofocus>
-      <button type="submit" class="submit-btn">Submit</button>
-    </form>
+    <input type="text" id="code" class="code-input" placeholder="Enter code" autofocus>
+    <button class="submit-btn" onclick="setChannel();">Submit</button>
+  </span>
   </div>
 </body>
 </html>
