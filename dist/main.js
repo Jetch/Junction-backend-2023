@@ -42,19 +42,11 @@ function calculateAbsoluteDifference(data) {
 
         if (Math.abs(data.ax) < 0.03) 
         {
-            console.log('Move!!!!!');
-            const keyEvent = new KeyboardEvent('keydown', {
-                key: 'g',
-            });
-            document.dispatchEvent(keyEvent);
-
-            const keyUp = new KeyboardEvent('keyup', {
-                key: 'g',
-            });
-            document.dispatchEvent(keyUp);
-            
+            console.log('Move!!!!!');                        
             const newValue = parseInt(audio1Slider.value) - 1;
             updateSliderValue(newValue);
+            Skeleton.dancer.raiseShoulder();
+
         }
 
         if (diffAx >= 3) {
