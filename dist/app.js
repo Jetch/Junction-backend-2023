@@ -205,6 +205,20 @@ Skeleton.prototype.display = function () {
 //
 let prevSensorData = null;
 
+const movementThreshold = 0.1;
+
+const initialSliderValue = 5;
+
+const audio1Slider = document.getElementById("myRange1");
+audio1Slider.value = initialSliderValue;
+
+const audio2Slider = document.getElementById("myRange2");
+audio2Slider.value = initialSliderValue;
+
+function updateSliderValue(value) {
+    audio1Slider.value = value;
+}
+
 function calculateAbsoluteDifference(data) {
     if (prevSensorData) {
         const diffAx = Math.abs(data.ax - prevSensorData.ax);
