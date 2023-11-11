@@ -6,7 +6,11 @@
 
 <button id='playaudio' onclick='playAudio()'>Play Audio</button>
 
+<script src = "/socket.io/socket.io.js"></script>
+
 <script>
+
+
 function playAudio(){
     var audio1 = document.getElementById('audio1');
     var audio2 = document.getElementById('audio2');
@@ -45,6 +49,8 @@ function sliderDragged(ev) {
 
 <!-- initial setup -->
 <script>
+    var socket = null;
+
     var lastEventDate1 = Date.now();
     var lastEventDate2 = Date.now();
 
@@ -76,7 +82,7 @@ function sliderDragged(ev) {
         if(lastEventDate2+100<Date.now()) {
                 console.log(ax,ay,az,gx,gy,gz,ox,oy,oz);
 
-if(socket !=  null && socket.readyState === WebSocket.OPEN) {
+if(socket !=  null && socket.connected) {
                 // Sample JSON data
     const jsonData = {
       ax: ax,
@@ -91,8 +97,8 @@ if(socket !=  null && socket.readyState === WebSocket.OPEN) {
     };
 
     // Sending JSON data as a string
-    socket.send(JSON.stringify(jsonData));
-    }
+    socket.emit((jsonData));
+    
 
 
                 lastEventDate2 = Date.now();
@@ -108,7 +114,6 @@ if(socket !=  null && socket.readyState === WebSocket.OPEN) {
     document.getElementById("myRange4").addEventListener("input", sliderDragged);
 
 
-var socket = null;
 
 function requestPermission() {
    // Request permission for iOS 13+ devices
@@ -123,13 +128,14 @@ function requestPermission() {
     window.addEventListener("deviceorientation", handleOrientation);
 
 
+    socket.emit('message', "Hello from Yuri!")
 
-    socket = new WebSocket('wss://junction-w0u1.onrender.com'); // Replace with your WebSocket server URL
 
-  socket.onOpen = function(event) {
-    console.log('WebSocket connection opened');
-
-    }
+      socket.on('message', text => {
+        const el = document.createElement('li')
+        el.innerHTML = text;
+        document.querySelector('ul').appendChild(el);
+      })
 
 
 }
