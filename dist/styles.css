@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
 }
 html,
@@ -15,4 +15,39 @@ canvas {
     position: absolute;
     z-index: 2;
 }
+ */
 
+ /* Created by GeekStar Codes */
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+button {
+    margin: 10px;
+    padding: 5px 10px;
+    background-color: #007BFF; /* Change to the desired background color */
+    color: white; /* Change to the desired text color */
+    border: none;
+    cursor: pointer;
+}
+
+
+/* Created by GeekStar Codes */
+
+/* 
+Subscribe to my YouTube channel for more cool stuffs.
+Link: https://t2m.io/pXUSmgPx 
+*/
