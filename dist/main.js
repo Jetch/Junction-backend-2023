@@ -26,17 +26,15 @@ function calculateAbsoluteDifference(data) {
         const diffAy = Math.abs(data.ay - prevSensorData.ay);
         const diffAz = Math.abs(data.az - prevSensorData.az);
 
-        const diffGx = Math.abs(data.gx - prevSensorData.gx);
-        const diffGy = Math.abs(data.gy - prevSensorData.gy);
-        const diffGz = Math.abs(data.gz - prevSensorData.gz);
+        // const diffGx = Math.abs(data.gx - prevSensorData.gx);
+        // const diffGy = Math.abs(data.gy - prevSensorData.gy);
+        // const diffGz = Math.abs(data.gz - prevSensorData.gz);
 
-        const diffOx = Math.abs(data.ox - prevSensorData.ox);
-        const diffOy = Math.abs(data.oy - prevSensorData.oy);
-        const diffOz = Math.abs(data.oz - prevSensorData.oz);
+        // const diffOx = Math.abs(data.ox - prevSensorData.ox);
+        // const diffOy = Math.abs(data.oy - prevSensorData.oy);
+        // const diffOz = Math.abs(data.oz - prevSensorData.oz);
 
-        const totalDiffOfY = diffGx + diffGy + diffGz;
-
-        const totalDiffOfO = diffOx + diffOy + diffOz;
+        const totalDiffOfA = diffAx + diffAy + diffAz;
 
         if (diffAx >= 2) {
             console.log('Big Movement on _A_ Detected!');
@@ -44,15 +42,18 @@ function calculateAbsoluteDifference(data) {
             updateSliderValue(newValue);
             console.log(audio1Slider.value);
             //can also add the drum
-
             const keyEvent = new KeyboardEvent('keydown', {
                 key: 'f'
             });
             document.dispatchEvent(keyEvent);
+
+            const keyUp = new KeyboardEvent('keyup', {
+                key: 'f',
+            });
+            document.dispatchEvent(keyUp);
         }
 
-        // if (totalDiffOfY >= movementThreshold)
-        if (Math.abs(data.ax) < 0.07) 
+        if (Math.abs(data.ax) < 0.03) 
         {
             console.log('Move!!!!!');
             const keyEvent = new KeyboardEvent('keydown', {
@@ -64,20 +65,29 @@ function calculateAbsoluteDifference(data) {
                 key: 'g',
             });
             document.dispatchEvent(keyUp);
-
             
             const newValue = parseInt(audio1Slider.value) - 1;
             updateSliderValue(newValue);
         }
 
-        if (totalDiffOfO >= movementThreshold)
-        {
+        if (totalDiffOfA >= 5) {
             console.log('Big Movement on _O_ Detected!');
-            const keyEvent = new KeyboardEvent('keydown', {
-                key: 'f'
+            
+            const mouseClickEvent = new MouseEvent('mousedown', {
+                bubbles: true,
+                cancelable: true,
+                view: window
             });
-            document.dispatchEvent(keyEvent);
 
+            document.dispatchEvent(mouseClickEvent);
+
+            const mouseUp = new MouseEvent('mouseup', {
+                bubbles: true,
+                cancelable: true,
+                view: window
+            });
+
+            document.dispatchEvent(mouseUp);
         }
     }
 
