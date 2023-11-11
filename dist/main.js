@@ -76,7 +76,7 @@ function handleReceivedSensorData(data) {
     calculateAbsoluteDifference(data);
 }
 
-// socket.on('motion', motionData => {
-//     handleReceivedSensorData(motionData);
-//     console.log(motionData)
-// });
+socket.on('motion', motionData => {
+    handleReceivedSensorData(motionData);
+    console.log(motionData)
+});
