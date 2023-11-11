@@ -46,12 +46,9 @@ function calculateAbsoluteDifference(data) {
             //can also add the drum
 
             const keyEvent = new KeyboardEvent('keydown', {
-                key: 'f',
-                code: 'KeyF',
-                which: 70,
-                keyCode: 70,
+                key: 'f'
             });
-            canvas.dispatchEvent(keyEvent);
+            document.dispatchEvent(keyEvent);
         }
 
         // if (totalDiffOfY >= movementThreshold)
@@ -60,11 +57,8 @@ function calculateAbsoluteDifference(data) {
             console.log('Move!!!!!');
             const keyEvent = new KeyboardEvent('keydown', {
                 key: 'g',
-                code: 'KeyG',
-                which: 70,
-                keyCode: 70,
             });
-            canvas.dispatchEvent(keyEvent);
+            document.dispatchEvent(keyEvent);
             const newValue = parseInt(audio1Slider.value) - 1;
             updateSliderValue(newValue);
         }
@@ -73,13 +67,9 @@ function calculateAbsoluteDifference(data) {
         {
             console.log('Big Movement on _O_ Detected!');
             const keyEvent = new KeyboardEvent('keydown', {
-                key: 'f',
-                code: 'KeyF',
-                which: 70,
-                keyCode: 70,
+                key: 'f'
             });
-            // document.dispatchEvent(keyEvent);
-            canvas.dispatchEvent(keyEvent);
+            document.dispatchEvent(keyEvent);
 
         }
     }
