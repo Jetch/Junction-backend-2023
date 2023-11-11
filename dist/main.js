@@ -38,7 +38,7 @@ function calculateAbsoluteDifference(data) {
 
         const totalDiffOfO = diffOx + diffOy + diffOz;
 
-        if (diffAx >= 5) {
+        if (diffAx >= 2) {
             console.log('Big Movement on _A_ Detected!');
             const newValue = parseInt(audio1Slider.value) + 1;
             updateSliderValue(newValue);
@@ -82,37 +82,9 @@ function calculateAbsoluteDifference(data) {
     prevSensorData = data;
 }
 
-//mock data
-const sensorData1 = {
-    ax: -0.08816913570985198,
-    ay: -0.07182488076090812,
-    az: 0.09079670773446559,
-    gx: 10.554004890409118,
-    gy: 3.832726501806805,
-    gz: -5.092158743243797,
-    ox: 339.28028106997095,
-    oy: 46.7991320504088,
-    oz: -3.210808919848527,
-};
-
-const sensorData2 = {
-    ax: 0.015036168025061487,
-    ay: -0.10292378337979316,
-    az: 0.10995149005949496,
-    gx: 0.028841621028715993,
-    gy: 2.436569454555203,
-    gz: -0.55516577986657,
-    ox: 338.8166064319288,
-    oy: 47.00023571952038,
-    oz: -2.8027368127909433,
-};
-
-
 function handleReceivedSensorData(data) {
     calculateAbsoluteDifference(data);
 }
-
-// handleReceivedSensorData(sensorData1)
 
 //test
 document.addEventListener("keydown", function (event) {
