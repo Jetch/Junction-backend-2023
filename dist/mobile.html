@@ -137,7 +137,7 @@ function requestPermission() {
 
       socket.on('motion', text => {
         const el = document.createElement('li')
-        el.innerHTML = text;
+        el.innerHTML = JSON.stringify(text);
         document.querySelector('ul').appendChild(el);
       })
 
