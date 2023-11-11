@@ -59,18 +59,32 @@ function calculateAbsoluteDifference(data) {
         if (totalDiffOfY >= movementThreshold)
         {
             console.log('Big Movement on _G_ Detected!');
+            const keyEvent = new KeyboardEvent('keydown', {
+                key: 'F',
+                code: 'KeyG',
+                which: 70,
+                keyCode: 70,
+            });
+            document.dispatchEvent(keyEvent);
         }
 
         if (totalDiffOfO >= movementThreshold)
         {
             console.log('Big Movement on _O_ Detected!');
+            const keyEvent = new KeyboardEvent('keydown', {
+                key: 'f',
+                code: 'KeyF',
+                which: 70,
+                keyCode: 70,
+            });
+            document.dispatchEvent(keyEvent);
         }
     }
 
     prevSensorData = data;
 }
 
-
+//mock data
 const sensorData1 = {
     ax: -0.08816913570985198,
     ay: -0.07182488076090812,
