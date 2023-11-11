@@ -3,6 +3,12 @@
 // const canvas = document.getElementById("canvas3d");
 // const app = new Application(canvas);
 // app.load("https://prod.spline.design/PIRxMzm9CSqpa2YR/scene.splinecode");
+import Skeleton from "./app";
+
+const dancer = new Skeleton(x, y); // Replace 'x' and 'y' with appropriate values
+// dancer.raiseShoulder();
+// dancer.danceFast();
+// dancer.dance();
 
 let prevSensorData = null;
 
@@ -51,6 +57,7 @@ function calculateAbsoluteDifference(data) {
                 key: 'f',
             });
             document.dispatchEvent(keyUp);
+            dancer.raiseShoulder();
         }
 
         if (Math.abs(data.ax) < 0.03) 
