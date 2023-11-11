@@ -70,7 +70,7 @@ function calculateAbsoluteDifference(data) {
             updateSliderValue(newValue);
         }
 
-        if (totalDiffOfA >= 5) {
+        if (diffAx >= 3) {
             console.log('Big Movement on _O_ Detected!');
             
             const mouseClickEvent = new MouseEvent('mousedown', {
