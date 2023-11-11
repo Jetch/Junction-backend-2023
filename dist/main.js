@@ -1,13 +1,3 @@
-// import Skeleton from './app'; // Replace './skeleton' with the correct path to your 'skeleton.js' file.
-
-// // Create a new dancer instance
-// const dancer = new Skeleton(/* provide the necessary constructor arguments */);
-
-// // Call the raiseShoulder() method
-// dancer.raiseShoulder();
-
-
-
 let prevSensorData = null;
 
 const movementThreshold = 0.1;
@@ -95,16 +85,7 @@ function handleReceivedSensorData(data) {
     calculateAbsoluteDifference(data);
 }
 
-//test
-document.addEventListener("keydown", function (event) {
-    if (event.key === "f") {
-        console.log("Key 'F' pressed");
-    } else if (event.key === "g") {
-        console.log("Key 'G' pressed");
-    }
-});
-
-socket.on('motion', motionData => {
-    handleReceivedSensorData(motionData);
-    console.log(motionData)
-});
+// socket.on('motion', motionData => {
+//     handleReceivedSensorData(motionData);
+//     console.log(motionData)
+// });
