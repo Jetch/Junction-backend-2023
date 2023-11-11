@@ -41,7 +41,7 @@ function calculateAbsoluteDifference(data) {
         const totalDiffOfA = diffAx + diffAy + diffAz;
 
         //shoulder up while big movement
-        if (diffAx >= 2) {
+        if (diffAx >= 3) {
             console.log('Big Movement on _A_ Detected!');
             const newValue = parseInt(audio1Slider.value) + 1;
             updateSliderValue(newValue);
@@ -65,7 +65,7 @@ function calculateAbsoluteDifference(data) {
         if (diffAx >= 4) {
             console.log('Very Big Movement Detected!');
             dancer.dance();
-            const newValue = parseInt(audio1Slider.value) + 1;
+            const newValue = parseInt(audio3Slider.value) + 1;
             updateSlider3Value(newValue)
             updateSlider4Value(newValue)
 
