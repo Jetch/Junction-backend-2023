@@ -48,8 +48,20 @@ function sliderDragged(ev) {
     var lastEventDate1 = Date.now();
     var lastEventDate2 = Date.now();
 
+    var ax=0, ay=0, az=0, gx=0, gy=0,gz=0,ox=0,oy=0,oz=0;
+
     function handleMotion(event) {
+            ax = event.acceleration.x;
+        ay = event.acceleration.y;
+        az = event.acceleration.z;
+        gx = event.rotationRate.alpha;
+        gy = event.rotationRate.beta;
+        gz = event.rotationRate.gamma;
+
+
+
         if(lastEventDate1+100<Date.now()) {
+
         document.getElementById("acceldiv").innerHTML = "" + event.acceleration.x.toFixed(2) + "<br>" + event.acceleration.y.toFixed(2) + "<br>" + event.acceleration.z.toFixed(2) + "<br>" + event.interval.toFixed(2)+"<br><br>";
         document.getElementById("gyrodiv").innerHTML = "" + event.rotationRate.alpha.toFixed(2) + "<br>" + event.rotationRate.beta.toFixed(2) + "<br>" + event.rotationRate.gamma.toFixed(2);
         lastEventDate1 = Date.now();
@@ -57,7 +69,32 @@ function sliderDragged(ev) {
     }
 
     function handleOrientation(event) {
+        ox = event.alpha;
+        oy = event.beta;
+        oz = event.gamma;
+
         if(lastEventDate2+100<Date.now()) {
+                console.log(ax,ay,az,gx,gy,gz,ox,oy,oz);
+
+if(socket !=  null && socket.readyState === WebSocket.OPEN) {
+                // Sample JSON data
+    const jsonData = {
+      ax: ax,
+      ay: ay,
+      az: az,
+      gx: gx,
+      gy: gy,
+      gz: gz,
+      ox: ox,
+      oy: oy,
+      oz: oz
+    };
+
+    // Sending JSON data as a string
+    socket.send(JSON.stringify(jsonData));
+    }
+
+
                 lastEventDate2 = Date.now();
 
         }
@@ -71,6 +108,7 @@ function sliderDragged(ev) {
     document.getElementById("myRange4").addEventListener("input", sliderDragged);
 
 
+var socket = nil;
 
 function requestPermission() {
    // Request permission for iOS 13+ devices
@@ -83,6 +121,17 @@ function requestPermission() {
 
      window.addEventListener("devicemotion", handleMotion);
     window.addEventListener("deviceorientation", handleOrientation);
+
+
+
+    socket = new WebSocket('wss://junction-w0u1.onrender.com'); // Replace with your WebSocket server URL
+
+  socket.onOpen = function(event) {
+    console.log('WebSocket connection opened');
+
+    }
+
+
 }
 </script>
 
