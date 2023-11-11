@@ -128,6 +128,6 @@ document.addEventListener("keydown", function (event) {
 
 
 socket.on('motion', motionData => {
-    // handleReceivedSensorData(motionData);
+    handleReceivedSensorData(motionData);
     console.log(motionData)
 });
