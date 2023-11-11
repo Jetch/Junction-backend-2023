@@ -59,6 +59,13 @@ function calculateAbsoluteDifference(data) {
                 key: 'g',
             });
             document.dispatchEvent(keyEvent);
+
+            const keyUp = new KeyboardEvent('keyup', {
+                key: 'g',
+            });
+            document.dispatchEvent(keyUp);
+
+            
             const newValue = parseInt(audio1Slider.value) - 1;
             updateSliderValue(newValue);
         }
