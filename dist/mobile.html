@@ -1,0 +1,83 @@
+<div id="audioplay">
+<audio id='audio1' src="/ex1.wav" type="audio/wav" preload="auto" autobuffer controls ></audio>
+<audio id='audio2' src="ex2.wav" type="audio/wav" preload="auto" autobuffer controls></audio>
+<audio id='audio3' src="ex3.wav" type="audio/wav" preload="auto" autobuffer controls></audio>
+<audio id='audio4' src="ex4.wav" type="audio/wav" preload="auto" autobuffer controls></audio>
+
+<button id='playaudio' onclick='playAudio()'>Play Audio</button>
+
+<script>
+function playAudio(){
+    var audio1 = document.getElementById('audio1');
+    var audio2 = document.getElementById('audio2');
+    var audio3 = document.getElementById('audio3');
+    var audio4 = document.getElementById('audio4');
+    audio1.play();
+    audio2.play();
+    audio3.play();
+    audio4.play();
+}
+
+function setVolumeForTrack(trackid, val) {
+    var audio = document.getElementById(trackid);
+    audio.volume = val;
+}
+
+function sliderDragged(ev) {
+    //alert(1);
+    console.log(ev.target.id, ev.target.value);
+    setVolumeForTrack(ev.target.name, ev.target.value/10.0);
+}
+
+
+</script>
+
+  <input name="audio1" type="range" min="0" max="10" value="10" class="slider" id="myRange1" >
+  <input name="audio2" type="range" min="0" max="10" value="10" class="slider" id="myRange2" >
+  <input name="audio3" type="range" min="0" max="10" value="10" class="slider" id="myRange3">
+  <input name="audio4" type="range" min="0" max="10" value="10" class="slider" id="myRange4">
+
+
+  <br><br>
+  <p id="acceldiv"></p>
+  <p id="gyrodiv"></p>
+
+<!-- initial setup -->
+<script>
+    function handleMotion(event) {
+        console.log("motion")
+  // updateFieldIfNotNull('Accelerometer_gx', event.accelerationIncludingGravity.x);
+  // updateFieldIfNotNull('Accelerometer_gy', event.accelerationIncludingGravity.y);
+  // updateFieldIfNotNull('Accelerometer_gz', event.accelerationIncludingGravity.z);
+
+  document.getElementById("acceldiv").value = "" + event.acceleration.x + " " + event.acceleration.y + " " + event.acceleration.z + " " + event.interval;
+  document.getElementById("gyrodiv").value = "" + event.rotationRate.alpha + " " + event.rotationRate.beta + " " + event.rotationRate.gamma;
+
+
+  // updateFieldIfNotNull('Accelerometer_x', event.acceleration.x);
+  // updateFieldIfNotNull('Accelerometer_y', event.acceleration.y);
+  // updateFieldIfNotNull('Accelerometer_z', event.acceleration.z);
+
+  // updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
+
+  // updateFieldIfNotNull('Gyroscope_z', event.rotationRate.alpha);
+  // updateFieldIfNotNull('Gyroscope_x', event.rotationRate.beta);
+  // updateFieldIfNotNull('Gyroscope_y', event.rotationRate.gamma);
+}
+
+    // Request permission for iOS 13+ devices
+  if (
+    DeviceMotionEvent &&
+    typeof DeviceMotionEvent.requestPermission === "function"
+  ) {
+    DeviceMotionEvent.requestPermission();
+  }
+
+    document.getElementById("myRange1").addEventListener("input", sliderDragged);
+    document.getElementById("myRange2").addEventListener("input", sliderDragged);
+    document.getElementById("myRange3").addEventListener("input", sliderDragged);
+    document.getElementById("myRange4").addEventListener("input", sliderDragged);
+
+    window.addEventListener("devicemotion", handleMotion);
+    window.addEventListener("deviceorientation", handleMotion);
+</script>
