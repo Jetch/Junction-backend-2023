@@ -34,16 +34,13 @@ function calculateAbsoluteDifference(data) {
         const diffOy = Math.abs(data.oy - prevSensorData.oy);
         const diffOz = Math.abs(data.oz - prevSensorData.oz);
 
-        const totalDiffOfA = diffAx + diffAy + diffAz;
-        console.log(totalDiffOfA)
-
         const totalDiffOfY = diffGx + diffGy + diffGz;
         console.log(totalDiffOfY)
 
         const totalDiffOfO = diffOx + diffOy + diffOz;
         console.log(totalDiffOfO)
 
-        if (diffAx >= 2) {
+        if (diffAx >= 5) {
             console.log('Big Movement on _A_ Detected!');
             const newValue = parseInt(audio1Slider.value) + 1;
             updateSliderValue(newValue);
