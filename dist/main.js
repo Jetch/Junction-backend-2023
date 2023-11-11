@@ -14,6 +14,10 @@ function updateSliderValue(value) {
     audio1Slider.value = value;
 }
 
+function updateSlider2Value(value) {
+    audio2Slider.value = value;
+}
+
 function calculateAbsoluteDifference(data) {
     if (prevSensorData) {
         const diffAx = Math.abs(data.ax - prevSensorData.ax);
@@ -22,24 +26,22 @@ function calculateAbsoluteDifference(data) {
 
         const totalDiffOfA = diffAx + diffAy + diffAz;
 
+        //shoulder up while big movement
         if (diffAx >= 2) {
             console.log('Big Movement on _A_ Detected!');
             const newValue = parseInt(audio1Slider.value) + 1;
             updateSliderValue(newValue);
             console.log(audio1Slider.value);
-            //can also add the drum
-            const keyEvent = new KeyboardEvent('keydown', {
-                key: 'f'
-            });
-            document.dispatchEvent(keyEvent);
-
-            const keyUp = new KeyboardEvent('keyup', {
-                key: 'f',
-            });
-            document.dispatchEvent(keyUp);
+            if (audio1Slider.value)
+            {
+                const newValue = parseInt(audio2Slider.value) + 1;
+                updateSlider2Value(newValue)
+            }
+         
             dancer.raiseShoulder();
         }
-
+        
+        //dying
         if (Math.abs(data.ax) < 0.0065) 
         {
             console.log('Move!!!!!');                        
@@ -48,6 +50,7 @@ function calculateAbsoluteDifference(data) {
             dancer.dancefast();
         }
 
+        //very big movement trigger lower buddy movement
         if (diffAx >= 4) {
             console.log('Very Big Movement Detected!');
             dancer.dance();
