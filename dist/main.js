@@ -57,7 +57,7 @@ function calculateAbsoluteDifference(data) {
         // if (totalDiffOfY >= movementThreshold)
         if (Math.abs(data.ax) < 0.07) 
         {
-            console.log('Media Movement on _G_ Detected!');
+            console.log('Move!!!!!');
             const keyEvent = new KeyboardEvent('keydown', {
                 key: 'g',
                 code: 'KeyG',
@@ -65,6 +65,8 @@ function calculateAbsoluteDifference(data) {
                 keyCode: 70,
             });
             document.dispatchEvent(keyEvent);
+            const newValue = parseInt(audio1Slider.value) - 1;
+            updateSliderValue(newValue);
         }
 
         if (totalDiffOfO >= movementThreshold)
