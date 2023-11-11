@@ -1,8 +1,9 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const http = require('http')
-//const cors = require('cors')
+const server = require('http').createServer(app)
+const io = require('socket.io')(server, { cors: { origin: "*"}})
+const cors = require('cors')
 
 const port = process.env.PORT
 
@@ -14,25 +15,28 @@ const requestLogger = (request, response, next) => {
     next()
 }
 
-const unknownEndpoint = (request, response) => {
-response.status(404).send({ error: 'unknown endpoint' })
-}
-
-//app.use(cors())
+app.use(cors())
 app.use(express.static('dist')) 
 app.use(express.json())
 app.use(requestLogger)
 
+io.on('connection', (socket) => {
+  console.log('user connected');
 
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+  socket.on('motion', (data) => {
+    console.log(data)
+    io.emit('data', data)
+  })
+  
+  socket.on('message', (message) => {
+    console.log(message)
+    io.emit('message', `${socket.id.substr(0,2)} said ${message}`)
+  })
+  socket.on('disconnect', function () {
+    console.log('user disconnected')
+  });
 })
 
-app.post('/motion', (request, response) => {
-    response.json()
-})
-
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
