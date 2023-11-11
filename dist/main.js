@@ -51,12 +51,14 @@ function calculateAbsoluteDifference(data) {
         }
         
         //dying
-        if (Math.abs(data.ax) < 0.0065) 
+        if (Math.abs(data.ax) < 0.0025) 
         {
             console.log('Move!!!!!');          
             const newValue = parseInt(audio1Slider.value) - 1;
             updateSliderValue(newValue);
-            updateSlider2Value(newValue)
+            updateSlider2Value(newValue);
+            updateSlider3Value(newValue);
+            updateSlider4Value(newValue);        
 
             dancer.danceFast();
         }
@@ -68,7 +70,6 @@ function calculateAbsoluteDifference(data) {
             const newValue = parseInt(audio3Slider.value) + 1;
             updateSlider3Value(newValue)
             updateSlider4Value(newValue)
-
         }
     }
 
