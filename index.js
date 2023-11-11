@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
 
   socket.on('motion', (data) => {
     console.log(data)
-    io.emit(str(data.channel), data)
+    io.emit(String(data.channel), data)
   })
   
   socket.on('message', (message) => {
@@ -45,7 +45,7 @@ app.get('/channel', (request, response) => {
     number = Math.floor(Math.random() * 1000000);
   }
   channel[number] = number
-  response.json(str(number))
+  response.json(String(number))
 })
 
 server.listen(port, () => {
