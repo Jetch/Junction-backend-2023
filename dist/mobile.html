@@ -21,11 +21,12 @@ function playAudio(){
 function setVolumeForTrack(trackid, val) {
     var audio = document.getElementById(trackid);
     audio.volume = val;
+
+    console.log(audio.volume);
 }
 
 function sliderDragged(ev) {
-    //alert(1);
-    console.log(ev.target.id, ev.target.value);
+    console.log(ev.target.name, ev.target.value);
     setVolumeForTrack(ev.target.name, ev.target.value/10.0);
 }
 
@@ -44,28 +45,35 @@ function sliderDragged(ev) {
 
 <!-- initial setup -->
 <script>
+    var lastEventDate1 = Date.now();
+    var lastEventDate2 = Date.now();
+
     function handleMotion(event) {
-        console.log("motion")
-  // updateFieldIfNotNull('Accelerometer_gx', event.accelerationIncludingGravity.x);
-  // updateFieldIfNotNull('Accelerometer_gy', event.accelerationIncludingGravity.y);
-  // updateFieldIfNotNull('Accelerometer_gz', event.accelerationIncludingGravity.z);
+        if(lastEventDate1+100<Date.now()) {
+        document.getElementById("acceldiv").innerHTML = "" + event.acceleration.x.toFixed(2) + "<br>" + event.acceleration.y.toFixed(2) + "<br>" + event.acceleration.z.toFixed(2) + "<br>" + event.interval.toFixed(2)+"<br><br>";
+        document.getElementById("gyrodiv").innerHTML = "" + event.rotationRate.alpha.toFixed(2) + "<br>" + event.rotationRate.beta.toFixed(2) + "<br>" + event.rotationRate.gamma.toFixed(2);
+        lastEventDate1 = Date.now();
+      }
+    }
 
-  document.getElementById("acceldiv").value = "" + event.acceleration.x + " " + event.acceleration.y + " " + event.acceleration.z + " " + event.interval;
-  document.getElementById("gyrodiv").value = "" + event.rotationRate.alpha + " " + event.rotationRate.beta + " " + event.rotationRate.gamma;
+    function handleOrientation(event) {
+        if(lastEventDate2+100<Date.now()) {
+                lastEventDate2 = Date.now();
+
+        }
+    }
 
 
-  // updateFieldIfNotNull('Accelerometer_x', event.acceleration.x);
-  // updateFieldIfNotNull('Accelerometer_y', event.acceleration.y);
-  // updateFieldIfNotNull('Accelerometer_z', event.acceleration.z);
 
-  // updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
+    document.getElementById("myRange1").addEventListener("input", sliderDragged);
+    document.getElementById("myRange2").addEventListener("input", sliderDragged);
+    document.getElementById("myRange3").addEventListener("input", sliderDragged);
+    document.getElementById("myRange4").addEventListener("input", sliderDragged);
 
-  // updateFieldIfNotNull('Gyroscope_z', event.rotationRate.alpha);
-  // updateFieldIfNotNull('Gyroscope_x', event.rotationRate.beta);
-  // updateFieldIfNotNull('Gyroscope_y', event.rotationRate.gamma);
-}
 
-    // Request permission for iOS 13+ devices
+
+function requestPermission() {
+   // Request permission for iOS 13+ devices
   if (
     DeviceMotionEvent &&
     typeof DeviceMotionEvent.requestPermission === "function"
@@ -73,11 +81,9 @@ function sliderDragged(ev) {
     DeviceMotionEvent.requestPermission();
   }
 
-    document.getElementById("myRange1").addEventListener("input", sliderDragged);
-    document.getElementById("myRange2").addEventListener("input", sliderDragged);
-    document.getElementById("myRange3").addEventListener("input", sliderDragged);
-    document.getElementById("myRange4").addEventListener("input", sliderDragged);
-
-    window.addEventListener("devicemotion", handleMotion);
-    window.addEventListener("deviceorientation", handleMotion);
+     window.addEventListener("devicemotion", handleMotion);
+    window.addEventListener("deviceorientation", handleOrientation);
+}
 </script>
+
+  <button onclick="requestPermission();">Start</button>
