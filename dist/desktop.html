@@ -46,7 +46,8 @@ function sliderDragged(ev) {
   <input name="audio4" type="range" min="0" max="10" value="5" class="slider" id="myRange4">
 
 <script>
-
+    var socket = null;
+    socket = io();
     
     document.getElementById("myRange1").addEventListener("input", sliderDragged);
     document.getElementById("myRange2").addEventListener("input", sliderDragged);
@@ -56,6 +57,6 @@ function sliderDragged(ev) {
 </script>
 
 
-<!-- <script type="module" src="./main.js"></script> -->
+<script type="module" src="./main.js"></script>
 
 <ul></ul>
