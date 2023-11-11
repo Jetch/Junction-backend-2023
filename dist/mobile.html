@@ -50,6 +50,7 @@ function sliderDragged(ev) {
 <!-- initial setup -->
 <script>
     var socket = null;
+    socket = io();
 
     var lastEventDate1 = Date.now();
     var lastEventDate2 = Date.now();
@@ -62,7 +63,7 @@ function sliderDragged(ev) {
         az = event.acceleration.z;
         gx = event.rotationRate.alpha;
         gy = event.rotationRate.beta;
-        gz = event.rotationRate.gamma;
+        gz = event.rotationRate.gamma;  
 
 
 
