@@ -1,157 +1,125 @@
-<!DOCTYPE html>
-<html>
-   <head>
-      <title>Hello!</title>
-   </head>
-   <body>
-<div id="audioplay">
-<audio id='audio1' src="/ex1.wav" type="audio/wav" preload="auto" autobuffer controls ></audio>
-<audio id='audio2' src="ex2.wav" type="audio/wav" preload="auto" autobuffer controls></audio>
-<audio id='audio3' src="ex3.wav" type="audio/wav" preload="auto" autobuffer controls></audio>
-<audio id='audio4' src="ex4.wav" type="audio/wav" preload="auto" autobuffer controls></audio>
-
-<button id='playaudio' onclick='playAudio()'>Play Audio</button>
-
-<script>
-function playAudio(){
-    var audio1 = document.getElementById('audio1');
-    var audio2 = document.getElementById('audio2');
-    var audio3 = document.getElementById('audio3');
-    var audio4 = document.getElementById('audio4');
-    audio1.play();
-    audio2.play();
-    audio3.play();
-    audio4.play();
-}
-
-function setVolumeForTrack(trackid, val) {
-    var audio = document.getElementById(trackid);
-    audio.volume = val;
-
-    console.log(audio.volume);
-}
-
-function sliderDragged(ev) {
-    console.log(ev.target.name, ev.target.value);
-    setVolumeForTrack(ev.target.name, ev.target.value/10.0);
-}
-
-
-</script>
-
-  <input name="audio1" type="range" min="0" max="10" value="10" class="slider" id="myRange1" >
-  <input name="audio2" type="range" min="0" max="10" value="10" class="slider" id="myRange2" >
-  <input name="audio3" type="range" min="0" max="10" value="10" class="slider" id="myRange3">
-  <input name="audio4" type="range" min="0" max="10" value="10" class="slider" id="myRange4">
-
-
-  <br><br>
-  <p id="acceldiv"></p>
-  <p id="gyrodiv"></p>
+<p id="acceldiv"></p>
+<p id="gyrodiv"></p>
+<script src = "/socket.io/socket.io.js"></script>
 
 <!-- initial setup -->
 <script>
-    var channel = null;
-    var lastEventDate1 = Date.now();
-    var lastEventDate2 = Date.now();
+  var socket = null;
+  socket = io();
+  var channel = null;
+  var lastEventDate1 = Date.now();
+  var lastEventDate2 = Date.now();
 
-    var ax=0, ay=0, az=0, gx=0, gy=0,gz=0,ox=0,oy=0,oz=0;
+  var ax=0, ay=0, az=0, gx=0, gy=0,gz=0,ox=0,oy=0,oz=0;
 
-    function setChannel() {
+  function setChannel() {
       channel = document.getElementById("channel").value;
       console.log(channel);
     }
 
-    function handleMotion(event) {
-        ax = event.acceleration.x;
-        ay = event.acceleration.y;
-        az = event.acceleration.z;
-        gx = event.rotationRate.alpha;
-        gy = event.rotationRate.beta;
-        gz = event.rotationRate.gamma;
+  function handleMotion(event) {
+          ax = event.acceleration.x;
+      ay = event.acceleration.y;
+      az = event.acceleration.z;
+      gx = event.rotationRate.alpha;
+      gy = event.rotationRate.beta;
+      gz = event.rotationRate.gamma;  
 
 
 
-        if(lastEventDate1+100<Date.now()) {
+      if(lastEventDate1+100<Date.now()) {
 
-        document.getElementById("acceldiv").innerHTML = "" + event.acceleration.x.toFixed(2) + "<br>" + event.acceleration.y.toFixed(2) + "<br>" + event.acceleration.z.toFixed(2) + "<br>" + event.interval.toFixed(2)+"<br><br>";
-        document.getElementById("gyrodiv").innerHTML = "" + event.rotationRate.alpha.toFixed(2) + "<br>" + event.rotationRate.beta.toFixed(2) + "<br>" + event.rotationRate.gamma.toFixed(2);
-        lastEventDate1 = Date.now();
-      }
+      document.getElementById("acceldiv").innerHTML = "" + event.acceleration.x.toFixed(2) + "<br>" + event.acceleration.y.toFixed(2) + "<br>" + event.acceleration.z.toFixed(2) + "<br>" + event.interval.toFixed(2)+"<br><br>";
+      document.getElementById("gyrodiv").innerHTML = "" + event.rotationRate.alpha.toFixed(2) + "<br>" + event.rotationRate.beta.toFixed(2) + "<br>" + event.rotationRate.gamma.toFixed(2);
+      lastEventDate1 = Date.now();
     }
-
-    function handleOrientation(event) {
-        ox = event.alpha;
-        oy = event.beta;
-        oz = event.gamma;
-
-        if(lastEventDate2+100<Date.now()) {
-                console.log(ax,ay,az,gx,gy,gz,ox,oy,oz);
-
-if(socket !=  null && socket.readyState === WebSocket.OPEN) {
-                // Sample JSON data
-    const jsonData = {
-      ax: ax,
-      ay: ay,
-      az: az,
-      gx: gx,
-      gy: gy,
-      gz: gz,
-      ox: ox,
-      oy: oy,
-      oz: oz,
-      channel: channel
-    };
-
-    // Sending JSON data as a string
-    socket.send(JSON.stringify(jsonData));
-    }
-
-
-                lastEventDate2 = Date.now();
-
-        }
-    }
-
-
-
-    document.getElementById("myRange1").addEventListener("input", sliderDragged);
-    document.getElementById("myRange2").addEventListener("input", sliderDragged);
-    document.getElementById("myRange3").addEventListener("input", sliderDragged);
-    document.getElementById("myRange4").addEventListener("input", sliderDragged);
-
-
-var socket = null;
-
-function requestPermission() {
-   // Request permission for iOS 13+ devices
-  if (
-    DeviceMotionEvent &&
-    typeof DeviceMotionEvent.requestPermission === "function"
-  ) {
-    DeviceMotionEvent.requestPermission();
   }
 
-     window.addEventListener("devicemotion", handleMotion);
-    window.addEventListener("deviceorientation", handleOrientation);
+  function handleOrientation(event) {
+      ox = event.alpha;
+      oy = event.beta;
+      oz = event.gamma;
+
+      if(lastEventDate2+100<Date.now()) {
+              console.log(ax,ay,az,gx,gy,gz,ox,oy,oz);
+
+if(socket !=  null && socket.connected) {
+  console.log("socket connected, so sending data");
+              // Sample JSON data
+  const jsonData = {
+    ax: ax,
+    ay: ay,
+    az: az,
+    gx: gx,
+    gy: gy,
+    gz: gz,
+    ox: ox,
+    oy: oy,
+    oz: oz,
+    channel: channel
+  };
+
+  // Sending JSON data as a string
+  
+  // TODO: uncomment for production!
+  socket.emit("motion", jsonData);
+  
+
+
+              lastEventDate2 = Date.now();
+
+      }
+  }
 
 
 
-    socket = new WebSocket('wss://junction-w0u1.onrender.com'); // Replace with your WebSocket server URL
+  document.getElementById("myRange1").addEventListener("input", sliderDragged);
+  document.getElementById("myRange2").addEventListener("input", sliderDragged);
+  document.getElementById("myRange3").addEventListener("input", sliderDragged);
+  document.getElementById("myRange4").addEventListener("input", sliderDragged);
+}
 
-  socket.onOpen = function(event) {
-    console.log('WebSocket connection opened');
 
-    }
+function requestPermission() {
+ // Request permission for iOS 13+ devices
+if (
+  DeviceMotionEvent &&
+  typeof DeviceMotionEvent.requestPermission === "function"
+) {
+  DeviceMotionEvent.requestPermission();
+}
+
+   window.addEventListener("devicemotion", handleMotion);
+  window.addEventListener("deviceorientation", handleOrientation);
+
+
+  socket.emit('message', "Hello from Yuri!")
+
+
+  /*
+    socket.on('motion', text => {
+      const el = document.createElement('li')
+      el.innerHTML = JSON.stringify(text);
+      document.querySelector('ul').appendChild(el);
+    })
+    */
 
 
 }
 </script>
-  <textarea id="channel"></textarea>
-  <br/>
-  <button onclick="setChannel();">Submit numbers on screen</button>
-  </br>
-  <button onclick="requestPermission();">Start</button>
-  </div>
-</body>
-  </html>
+
+<textarea id="channel"></textarea>
+<br/>
+<button onclick="setChannel();">Submit numbers on screen</button>
+</br>
+<button onclick="requestPermission();">Start</button>
+
+
+
+
+
+
+
+
+
+
