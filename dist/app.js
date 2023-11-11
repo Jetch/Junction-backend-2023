@@ -201,3 +201,6 @@ Skeleton.prototype.display = function () {
         p.display();
     }
 }
+
+
+module.exports = Skeleton;
