@@ -100,7 +100,7 @@ function handleReceivedSensorData(data) {
     calculateAbsoluteDifference(data);
 }
 
-handleReceivedSensorData(sensorData1)
+// handleReceivedSensorData(sensorData1)
 
 //test
 document.addEventListener("keydown", function (event) {
