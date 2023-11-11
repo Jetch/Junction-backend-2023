@@ -64,8 +64,10 @@
       channel = document.getElementById("code").value;
       if (channel === "") { return; };
       requestPermission();
-      document.getElementById("title").innerHTML = "Ready to Play! \uD83E\uDD17";
+      document.getElementById("title").innerHTML = "Start dancing with your phone! \uD83E\uDD17";
       document.getElementById("codeblock").hidden = true;
+      document.getElementById("numbers").innerHTML = "You submitted code " + channel;
+      document.getElementById("numbers").hidden = false;
     }
   
     function handleMotion(event) {
@@ -128,6 +130,7 @@
 <body>
   <div class="login-container">
     <h2 id="title">Enter the code to begin</h2>
+    <h3 hidden id="numbers"></h3>
     <span id="codeblock">
     <p>The code should be shown on your other device</p>
     <input type="text" id="code" class="code-input" placeholder="Enter code" autofocus>
