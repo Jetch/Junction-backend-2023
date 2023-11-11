@@ -22,15 +22,17 @@ function updateSliderValue(value) {
 
 function updateSlider2Value(value) {
     audio2Slider.value = value;
-}
-
-function updateSlider3Value(value) {
     audio3Slider.value = value;
-}
-
-function updateSlider4Value(value) {
     audio4Slider.value = value;
 }
+
+// function updateSlider3Value(value) {
+//     audio3Slider.value = value;
+// }
+
+// function updateSlider4Value(value) {
+//     audio4Slider.value = value;
+// }
 
 function calculateAbsoluteDifference(data) {
     if (prevSensorData) {
@@ -57,8 +59,8 @@ function calculateAbsoluteDifference(data) {
             const newValue = parseInt(audio1Slider.value) - 1;
             updateSliderValue(newValue);
             updateSlider2Value(newValue);
-            updateSlider3Value(newValue);
-            updateSlider4Value(newValue);        
+            // updateSlider3Value(newValue);
+//             updateSlider4Value(newValue);        
 
             dancer.danceFast();
         }
@@ -68,8 +70,8 @@ function calculateAbsoluteDifference(data) {
             console.log('Very Big Movement Detected!');
             dancer.dance();
             const newValue = parseInt(audio3Slider.value) + 1;
-            updateSlider3Value(newValue)
-            updateSlider4Value(newValue)
+            updateSlider2Value(newValue)
+            // updateSlider4Value(newValue)
         }
     }
 
