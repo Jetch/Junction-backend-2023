@@ -46,7 +46,6 @@ function calculateAbsoluteDifference(data) {
             const newValue = parseInt(audio1Slider.value) - 1;
             updateSliderValue(newValue);
             Skeleton.dancer.raiseShoulder();
-
         }
 
         if (diffAx >= 3) {
