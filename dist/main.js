@@ -10,12 +10,26 @@ audio1Slider.value = initialSliderValue;
 const audio2Slider = document.getElementById("myRange2");
 audio2Slider.value = initialSliderValue;
 
+const audio3Slider = document.getElementById("myRange3");
+audio3Slider.value = initialSliderValue;
+
+const audio4Slider = document.getElementById("myRange4");
+audio4Slider.value = initialSliderValue;
+
 function updateSliderValue(value) {
     audio1Slider.value = value;
 }
 
 function updateSlider2Value(value) {
     audio2Slider.value = value;
+}
+
+function updateSlider3Value(value) {
+    audio3Slider.value = value;
+}
+
+function updateSlider4Value(value) {
+    audio4Slider.value = value;
 }
 
 function calculateAbsoluteDifference(data) {
@@ -31,7 +45,7 @@ function calculateAbsoluteDifference(data) {
             console.log('Big Movement on _A_ Detected!');
             const newValue = parseInt(audio1Slider.value) + 1;
             updateSliderValue(newValue);
-            console.log(audio1Slider.value);
+            updateSlider2Value(newValue)
          
             dancer.raiseShoulder();
         }
@@ -42,6 +56,8 @@ function calculateAbsoluteDifference(data) {
             console.log('Move!!!!!');          
             const newValue = parseInt(audio1Slider.value) - 1;
             updateSliderValue(newValue);
+            updateSlider2Value(newValue)
+
             dancer.danceFast();
         }
 
@@ -49,6 +65,10 @@ function calculateAbsoluteDifference(data) {
         if (diffAx >= 4) {
             console.log('Very Big Movement Detected!');
             dancer.dance();
+            const newValue = parseInt(audio1Slider.value) + 1;
+            updateSlider3Value(newValue)
+            updateSlider4Value(newValue)
+
         }
     }
 
