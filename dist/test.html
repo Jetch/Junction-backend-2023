@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello!</title>
+   </head>
+   <script src = "/socket.io/socket.io.js"></script>
+   <script>
+      const socket = io();
+      socket.on('motion', data => {
+        const el = document.createElement('li')
+        el.innerHTML = JSON.stringify(data);
+        document.querySelector('ul').appendChild(el);
+      })
+   </script>
+   <body>Testing WS data from motion device.
+     <ul></ul>
+   </body>
+</html>

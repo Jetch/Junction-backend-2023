@@ -25,7 +25,7 @@ io.on('connection', (socket) => {
 
   socket.on('motion', (data) => {
     console.log(data)
-    io.emit('data', data)
+    io.emit('motion', data)
   })
   
   socket.on('message', (message) => {
