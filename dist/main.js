@@ -58,11 +58,9 @@ function calculateAbsoluteDifference(data) {
             console.log('Move!!!!!');          
             const newValue = parseInt(audio1Slider.value) - 1;
             updateSliderValue(newValue);
-            updateSlider2Value(newValue);
-            // updateSlider3Value(newValue);
-//             updateSlider4Value(newValue);        
+            updateSlider2Value(newValue); 
 
-            dancer.danceFast();
+            // dancer.danceFast();
         }
 
         //very big movement trigger lower buddy movement
