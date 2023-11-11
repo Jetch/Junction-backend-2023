@@ -23,33 +23,33 @@ function setup()
     dancer = new Skeleton(width / 2, height / 2 - 150);
 
     // Create buttons
-    var raiseShoulderBtn = document.createElement("button");
-    raiseShoulderBtn.id = "raiseShoulderBtn";
-    raiseShoulderBtn.textContent = "Raise Shoulder";
+    // var raiseShoulderBtn = document.createElement("button");
+    // raiseShoulderBtn.id = "raiseShoulderBtn";
+    // raiseShoulderBtn.textContent = "Raise Shoulder";
 
-    var danceFastBtn = document.createElement("button");
-    danceFastBtn.id = "danceFastBtn";
-    danceFastBtn.textContent = "Dance Fast";
+    // var danceFastBtn = document.createElement("button");
+    // danceFastBtn.id = "danceFastBtn";
+    // danceFastBtn.textContent = "Dance Fast";
 
-    var danceBtn = document.createElement("button");
-    danceBtn.id = "danceBtn";
-    danceBtn.textContent = "Dance";
+    // var danceBtn = document.createElement("button");
+    // danceBtn.id = "danceBtn";
+    // danceBtn.textContent = "Dance";
 
-    document.body.appendChild(raiseShoulderBtn);
-    document.body.appendChild(danceFastBtn);
-    document.body.appendChild(danceBtn);
+    // document.body.appendChild(raiseShoulderBtn);
+    // document.body.appendChild(danceFastBtn);
+    // document.body.appendChild(danceBtn);
 
-    document.getElementById("raiseShoulderBtn").addEventListener("click", function() {
-        dancer.raiseShoulder();
-    });
+    // document.getElementById("raiseShoulderBtn").addEventListener("click", function() {
+    //     dancer.raiseShoulder();
+    // });
 
-    document.getElementById("danceFastBtn").addEventListener("click", function() {
-        dancer.danceFast();
-    });
+    // document.getElementById("danceFastBtn").addEventListener("click", function() {
+    //     dancer.danceFast();
+    // });
 
-    document.getElementById("danceBtn").addEventListener("click", function() {
-        dancer.dance();
-    });
+    // document.getElementById("danceBtn").addEventListener("click", function() {
+    //     dancer.dance();
+    // });
 }
 
 function draw() {

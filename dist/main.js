@@ -32,7 +32,7 @@ function calculateAbsoluteDifference(data) {
             const newValue = parseInt(audio1Slider.value) + 1;
             updateSliderValue(newValue);
             console.log(audio1Slider.value);
-            if (audio1Slider.value === 10)
+            if (audio1Slider.value == 10)
             {
                 const newValue = parseInt(audio2Slider.value) + 1;
                 updateSlider2Value(newValue)
