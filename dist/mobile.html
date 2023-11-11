@@ -100,7 +100,7 @@ if(socket !=  null && socket.connected) {
     };
 
     // Sending JSON data as a string
-    socket.emit((jsonData));
+    socket.emit("message", str(jsonData));
     
 
 
