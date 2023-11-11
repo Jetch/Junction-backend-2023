@@ -35,10 +35,8 @@ function calculateAbsoluteDifference(data) {
         const diffOz = Math.abs(data.oz - prevSensorData.oz);
 
         const totalDiffOfY = diffGx + diffGy + diffGz;
-        console.log(totalDiffOfY)
 
         const totalDiffOfO = diffOx + diffOy + diffOz;
-        console.log(totalDiffOfO)
 
         if (diffAx >= 5) {
             console.log('Big Movement on _A_ Detected!');
@@ -125,23 +123,7 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
-// document.addEventListener("keydown", function (event) {
-//     if (event.key === "p") {
-//         // Create a KeyboardEvent to simulate the 'F' keypress.
-//         const keyEvent = new KeyboardEvent('keydown', {
-//             key: 'f',
-//             code: 'KeyF',
-//             which: 70,
-//             keyCode: 70,
-//         });
-
-//         // Dispatch the keypress event for the 'F' key.
-//         document.dispatchEvent(keyEvent);
-//     }
-// });
-
-
 socket.on('motion', motionData => {
     handleReceivedSensorData(motionData);
-    console.log(motionData)
+    // console.log(motionData)
 });
