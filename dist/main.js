@@ -1,8 +1,8 @@
-import { Application } from "@splinetool/runtime";
+// import { Application } from "@splinetool/runtime";
 
-const canvas = document.getElementById("canvas3d");
-const app = new Application(canvas);
-app.load("https://prod.spline.design/PIRxMzm9CSqpa2YR/scene.splinecode");
+// const canvas = document.getElementById("canvas3d");
+// const app = new Application(canvas);
+// app.load("https://prod.spline.design/PIRxMzm9CSqpa2YR/scene.splinecode");
 
 let prevSensorData = null;
 
