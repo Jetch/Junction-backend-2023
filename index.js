@@ -15,6 +15,8 @@ const requestLogger = (request, response, next) => {
     next()
 }
 
+let channel = {}
+
 app.use(cors())
 app.use(express.static('dist')) 
 app.use(express.json())
@@ -25,7 +27,7 @@ io.on('connection', (socket) => {
 
   socket.on('motion', (data) => {
     console.log(data)
-    io.emit('motion', data)
+    io.emit(str(data.channel), data)
   })
   
   socket.on('message', (message) => {
@@ -35,6 +37,15 @@ io.on('connection', (socket) => {
   socket.on('disconnect', function () {
     console.log('user disconnected')
   });
+})
+
+app.get('/channel', (request, response) => {
+  let number = Math.floor(Math.random() * 1000000);
+  while (!channel[number]) {
+    number = Math.floor(Math.random() * 1000000);
+  }
+  channel[number] = number
+  response.json(str(number))
 })
 
 server.listen(port, () => {
