@@ -22,12 +22,10 @@ function calculateAbsoluteDifference(data) {
         if (Math.abs(data.ax) < 0.0025) 
         {
             console.log('Move!!!!!');          
-            setVolumeForTrack("audio1", -0.4);
-            setVolumeForTrack("audio2", -0.4);
-            setVolumeForTrack("audio3", -0.4);
-            setVolumeForTrack("audio4", -0.4);
-
-            // dancer.danceFast();
+            setVolumeForTrack("audio1", -0.6);
+            setVolumeForTrack("audio2", -0.6);
+            setVolumeForTrack("audio3", -0.6);
+            setVolumeForTrack("audio4", -0.6);
         }
 
         //very big movement trigger lower buddy movement

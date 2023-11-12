@@ -1,24 +1,3 @@
-/* body {
-  margin: 0;
-}
-html,
-body {
-  height: 90%;
-}
-
-canvas {
-  display: block;
-  height: 70%;
-}
-
-.custom-button {
-    position: absolute;
-    z-index: 2;
-}
- */
-
- /* Created by GeekStar Codes */
-
 body {
     margin: 0;
     padding: 0;
@@ -43,11 +22,3 @@ button {
     border: none;
     cursor: pointer;
 }
-
-
-/* Created by GeekStar Codes */
-
-/* 
-Subscribe to my YouTube channel for more cool stuffs.
-Link: https://t2m.io/pXUSmgPx 
-*/

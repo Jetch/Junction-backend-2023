@@ -27,8 +27,6 @@ function playAudio(){
 function setVolumeForTrack(trackid, val) {
     var audio = document.getElementById(trackid);
     audio.volume = Math.max(Math.min(audio.volume + val,1),0);
-
-    console.log(audio.volume);
 }
 
 
