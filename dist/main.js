@@ -10,7 +10,6 @@ function calculateAbsoluteDifference(data) {
 
         //shoulder up while big movement
         if (diffAx >= 4) {
-            console.log('Big Movement on _A_ Detected!');
             setVolumeForTrack("audio1", 0.1);
             setVolumeForTrack("audio2", 0.1);
             setVolumeForTrack("audio3", 0.1);
@@ -20,8 +19,7 @@ function calculateAbsoluteDifference(data) {
         
         //dying
         if (Math.abs(data.ax) < 0.0025) 
-        {
-            console.log('Move!!!!!');          
+        {   
             setVolumeForTrack("audio1", -0.6);
             setVolumeForTrack("audio2", -0.6);
             setVolumeForTrack("audio3", -0.6);
@@ -30,7 +28,6 @@ function calculateAbsoluteDifference(data) {
 
         //very big movement trigger lower buddy movement
         if (diffAx >= 5) {
-            console.log('Very Big Movement Detected!');
             dancer.dance();
             setVolumeForTrack("audio1", 0.1);
             setVolumeForTrack("audio2", 0.1);
@@ -51,5 +48,4 @@ document.getElementById("code").innerHTML = "Code for mobile app: " + channel
 socket.on(channel, motionData =>
 {
     handleReceivedSensorData(motionData);
-    console.log(motionData)
 });

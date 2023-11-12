@@ -29,14 +29,9 @@ io.on('connection', (socket) => {
   console.log('user connected');
 
   socket.on('motion', (data) => {
-    console.log(data)
     io.emit(String(data.channel), data)
   })
   
-  socket.on('message', (message) => {
-    console.log(message)
-    io.emit('message', `${socket.id.substr(0,2)} said ${message}`)
-  })
   socket.on('disconnect', function () {
     console.log('user disconnected')
   });
