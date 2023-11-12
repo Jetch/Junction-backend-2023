@@ -21,35 +21,6 @@ function setup()
     physics.setWorldBounds(new Rect(0, 0, width, height));
 
     dancer = new Skeleton(width / 2, height / 2 - 150);
-
-    // Create buttons
-    // var raiseShoulderBtn = document.createElement("button");
-    // raiseShoulderBtn.id = "raiseShoulderBtn";
-    // raiseShoulderBtn.textContent = "Raise Shoulder";
-
-    // var danceFastBtn = document.createElement("button");
-    // danceFastBtn.id = "danceFastBtn";
-    // danceFastBtn.textContent = "Dance Fast";
-
-    // var danceBtn = document.createElement("button");
-    // danceBtn.id = "danceBtn";
-    // danceBtn.textContent = "Dance";
-
-    // document.body.appendChild(raiseShoulderBtn);
-    // document.body.appendChild(danceFastBtn);
-    // document.body.appendChild(danceBtn);
-
-    // document.getElementById("raiseShoulderBtn").addEventListener("click", function() {
-    //     dancer.raiseShoulder();
-    // });
-
-    // document.getElementById("danceFastBtn").addEventListener("click", function() {
-    //     dancer.danceFast();
-    // });
-
-    // document.getElementById("danceBtn").addEventListener("click", function() {
-    //     dancer.dance();
-    // });
 }
 
 function draw() {
@@ -225,19 +196,5 @@ Skeleton.prototype.display = function () {
     }
 }
 
-//
 
-// const movementThreshold = 0.1;
-// const initialSliderValue = 5;
-
-// const audio1Slider = document.getElementById("myRange1");
-// audio1Slider.value = initialSliderValue;
-
-// const audio2Slider = document.getElementById("myRange2");
-// audio2Slider.value = initialSliderValue;
-
-// function updateSliderValue(value) {
-//     audio1Slider.value = value;
-//     // Rest of your code
-// }
     

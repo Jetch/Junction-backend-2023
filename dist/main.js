@@ -2,25 +2,11 @@ let prevSensorData = null;
 
 const movementThreshold = 0.1;
 
-
-
-
-
-// function updateSlider3Value(value) {
-//     audio3Slider.value = value;
-// }
-
-// function updateSlider4Value(value) {
-//     audio4Slider.value = value;
-// }
-
 function calculateAbsoluteDifference(data) {
     if (prevSensorData) {
         const diffAx = Math.abs(data.ax - prevSensorData.ax);
         const diffAy = Math.abs(data.ay - prevSensorData.ay);
         const diffAz = Math.abs(data.az - prevSensorData.az);
-
-        const totalDiffOfA = diffAx + diffAy + diffAz;
 
         //shoulder up while big movement
         if (diffAx >= 4) {
