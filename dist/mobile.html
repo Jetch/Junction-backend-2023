@@ -84,7 +84,7 @@
       oy = event.beta;
       oz = event.gamma;
   
-      if (lastEventDate + 100 < Date.now()) {
+      if (lastEventDate + 200 < Date.now()) {
         console.log(ax, ay, az, gx, gy, gz, ox, oy, oz);
   
         if (socket != null && socket.connected) {
