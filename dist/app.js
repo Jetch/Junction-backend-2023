@@ -26,7 +26,6 @@ function setup()
 function draw() {
     background(0);
     dancer.display();
-    // dancer.dance();
     physics.update();
 }
 
@@ -41,7 +40,6 @@ Particle.prototype.display = function () {
     strokeWeight(15); // width of outer covering
     // Elliptical object
     ellipse(this.p.x, this.p.y, this.r * 2, this.r * 2);
-    // image(avatar, this.parts[0].p.x - this.parts[0].r, this.parts[0].p.y - this.parts[0].r, this.parts[0].r * 2, this.parts[0].r * 2);
 }
 
 Particle.prototype.lock = function () {

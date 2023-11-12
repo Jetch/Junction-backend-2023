@@ -46,7 +46,9 @@ function handleReceivedSensorData(data) {
     calculateAbsoluteDifference(data);
 }
 
-socket.on('motion', motionData =>
+var channel = (new Date().getTime()).toString().substr(-8);
+document.getElementById("code").innerHTML = "Code for mobile app: " + channel
+socket.on(channel, motionData =>
 {
     handleReceivedSensorData(motionData);
     console.log(motionData)

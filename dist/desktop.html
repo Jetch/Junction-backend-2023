@@ -3,7 +3,8 @@
 <audio hidden id='audio2' src="ex2.wav" type="audio/wav" preload="auto" autobuffer controls loop></audio>
 <audio hidden id='audio3' src="ex3.wav" type="audio/wav" preload="auto" autobuffer controls loop></audio>
 <audio hidden id='audio4' src="ex4.wav" type="audio/wav" preload="auto" autobuffer controls loop></audio>
-
+<h1 id="code"></h1>
+<h2>Press button to play music. Without movement music will eventually stop</h2>
 <button id='playaudio' onclick='playAudio()'>Play Audio</button>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toxiclibsjs/0.1.3/toxiclibs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
@@ -11,6 +12,20 @@
 <script src="app.js"></script>
 
 <link rel="stylesheet" href="./styles.css" />
+<style>
+    body { color: white }
+    h1, h2 {
+        text-align: center;
+    }
+    h1 {
+        padding-top: 20px;
+    }
+    button {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+    }
+</style>
 <script>
 
 function playAudio(){
@@ -28,11 +43,9 @@ function setVolumeForTrack(trackid, val) {
     var audio = document.getElementById(trackid);
     audio.volume = Math.max(Math.min(audio.volume + val,1),0);
 }
-
-
 </script>
 
- 
+
 <script>
     var socket = null;
     socket = io();
